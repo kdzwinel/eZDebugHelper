@@ -1,0 +1,28 @@
+{
+  "name": "eZDebug Helper",
+  "description": "Debug panel for eZPublish (4.5+) websites developers.",
+  "version": "0.26",
+  "permissions": [
+    "tabs", "http://*/*"
+  ],
+  "icons": {
+     "16": "icon_16.png",
+     "48": "icon_48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "css" : ["css/debug_toolbar.css", "css/ui-lightness/jquery-ui-1.8.18.custom.css"],
+      "js" : ["js/lib/jquery-1.7.1.min.js",
+              "js/lib/jquery-ui-1.8.18.custom.min.js",
+              "js/Settings.class.js",
+              "js/MessagesList.class.js",
+              "js/TemplateCommentReader.class.js",
+              "js/PopupPositioner.class.js",
+              "js/TemplatesList.class.js",
+              "js/DebugToolbar.class.js",
+              "js/contentscript.js"]
+    }
+  ]
+}
+
