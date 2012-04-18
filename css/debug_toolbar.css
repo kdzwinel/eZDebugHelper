@@ -12,16 +12,7 @@
 	font-family: tahoma;
 	background-color: white;
 	color: black;
-	padding: 5px;
 	line-height: 1.2;
-
-	/*position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 1000;
-	width: 600px;
-
-	box-shadow: black -2px 2px 31px;*/
 }
 
 	#debug_toolbar_tabs {
@@ -59,28 +50,27 @@
 			margin-left: 0;
 			margin-top: 0;
 			padding: 2px;
+			padding-left: 40px;
 
 			background-color: #00A0B0;
 			cursor: pointer;
+
+			background-position-x: 5px;
+			background-position-y: 5px;
+			background-repeat: no-repeat;
 		}
 
-			#debug_toolbar .debug_templates li.template_not_visible {
+			#debug_toolbar .debug_templates li.template_position_unknown {
 			}
 
-			#debug_toolbar .debug_templates li.template_in_head {
+			#debug_toolbar .debug_templates li.template_position_head {
 				background-color: #EDC951;
 				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAGCAYAAAA2aTUtAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEAkvCWigPO0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAtUlEQVQoz63Rz0pCYRQE8B/uBXc+QYaChAutx+ld+rPxIaIkDI1aRPteJ1yGaSrZZpTL5boJZ/OdOTBzzpyPamz9D5W6WqEeYOo4mKBfbHQwwi0a6W3wisvwGywxDH/BCm/hT6l3SRrRPKANM/RKm/ziFIvweQzm4SOsC6YLtCrOdYZP6GJcSrItvV9oFsSrGKxRT8qTUpJrPMZ/jws8HxhyhR/ch3/gLif6zpLvqWv52/Od8R/31zCgSFmoSwAAAABJRU5ErkJggg==);
-				background-position-x: 99%;
-				background-position-y: 5px;
-				background-repeat: no-repeat;
 			}
 
-			#debug_toolbar .debug_templates li.template_in_body {
+			#debug_toolbar .debug_templates li.template_position_body {
 				background-color: #EB6841;
 				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAHCAYAAAD9NeaIAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEAkzAPcL2RQAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAz0lEQVQoz7XRq0qDARyG8Z+6JAqDgWlFGIoWMXjIw2sQTMKuYIjJKGjwJhRFJpvJwzV4CzaTYVhEZGKZlncwPiYTxLc9//OBn/XldxobN1ngdXT8XW2sFY3LuMAxyrH1cY+98Dbe0Ahf4TabzOEy9lMs4AjnWBo0ecHqiDMs4iH8mOT38Ed4cK5rzAw1gxV0S4E6DvCEE7wmuY9KYqoo4TM8UfjHDQ6zfRn7mMdW8WybmWgqE9+hGd8uutgJt1Kwl9/O4hnT+euGf1ANZ6Mc338+K1OhMO3/AAAAAElFTkSuQmCC);
-				background-position-x: 99%;
-				background-position-y: 5px;
-				background-repeat: no-repeat;
 			}
 
 			#debug_toolbar .debug_templates li span {
@@ -139,7 +129,7 @@
 				margin-top: 0;
 				padding: 2px;
 
-				max-height: 35px;
+				max-height: 16px;
 				overflow: hidden;
 				cursor: pointer;
 				word-wrap: break-word;
@@ -155,7 +145,7 @@
 			}
 
 			#debug_toolbar .debug_messages li.error {
-				background-color: #E34234;
+				background-color: #E2725B;
 			}
 
 			#debug_toolbar .debug_messages li.warning {

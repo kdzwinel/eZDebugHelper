@@ -1,5 +1,5 @@
 function TemplatesList() {
-	this.popupPositioner = new PopupPositioner();
+	this.popupPositioner;
 	var templates = []
 	var listDiv;
 	var templatesPositions;
@@ -16,6 +16,14 @@ function TemplatesList() {
 				used: $(item).find('td:eq(3)').text()
 			});
 		});
+	}
+	
+	this.getTemplates = function() {
+		return templates;
+	}
+	
+	this.setTemplates = function(newTemplates) {
+		templates = newTemplates;
 	}
 	
 	this.uniqueCount = function() {
@@ -51,9 +59,7 @@ function TemplatesList() {
 				var detailsDiv = $(this).find('div.details');
 				
 				detailsDiv.toggle();
-				
-				that.setVisibilityOfTemplatePositions(detailsDiv.data('templateUsed'), detailsDiv.is(':visible'));
-			}).html('<span>' + template.requested + '</span>').append(details);
+			}).addClass('template_position_' + template.DOMPosition).html('<span>' + template.requested + '</span>').append(details);
 			
 			template.listBox = messageBody;
 			
@@ -74,15 +80,15 @@ function TemplatesList() {
 			var templatePositionData = that.templatePositions[template.used];
 			
 			if(templatePositionData === undefined) {
-				template.listBox.addClass('template_not_visible');
+				template.DOMPosition = "unknown";
 				continue;
 			}
 		
 			//NOTE we are basing on a first comment for given template - this may sometimes return false results
 			if(templatePositionData[0].inHead) {
-				template.listBox.addClass('template_in_head');
+				template.DOMPosition = "head";
 			}else if(templatePositionData[0].inBody) {
-				template.listBox.addClass('template_in_body');
+				template.DOMPosition = "body";;
 			}
 		}
 	}
@@ -100,6 +106,7 @@ function TemplatesList() {
 				var popupObj = $('<div>').addClass('ezdebug_template_infobox').data('templateUsed', templateFile).attr('title', templateFile);
 				
 				//positions popup over template content
+				that.popupPositioner = that.popupPositioner || new PopupPositioner();
 				that.popupPositioner.setPopupPosition(popupObj, positionObj.commentObj, positionObj.commentEndObj);
 				
 				positionObj.popupObj = popupObj;
