@@ -9,6 +9,7 @@
      "16": "icon_16.png",
      "48": "icon_48.png"
   },
+  "background_page": "background.html",
   "devtools_page": "devtools.html",
   "content_scripts": [
     {

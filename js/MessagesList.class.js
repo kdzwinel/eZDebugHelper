@@ -23,6 +23,14 @@ function MessagesList() {
 		});
 	}
 	
+	this.getMessages = function() {
+		return messages;
+	}
+	
+	this.setMessages = function(newMessages) {
+		messages = newMessages;
+	}
+	
 	this.count = function(type) {
 		var count = 0;
 		
@@ -70,12 +78,12 @@ function MessagesList() {
 			var menuCheckbox = $('<input>').attr('type', 'checkbox').attr('id', 'message_filter_' + messageType).val(messageType);
 			var menuLabel = $('<label>').attr('for', 'message_filter_' + messageType).text(messageType + ' (' + that.count(messageType) + ')');
 			
-			if(settings.get(messageType + '_visible', true)) {
-				menuCheckbox.attr('checked', 'checked');
-			}
+			//if(settings.get(messageType + '_visible', true)) {
+			//	menuCheckbox.attr('checked', 'checked');
+			//}
 			
 			menuCheckbox.change(function(){
-				settings.set($(this).val() + '_visible', $(this).is(':checked'));
+				//settings.set($(this).val() + '_visible', $(this).is(':checked'));
 				that.filterMessages();
 			});
 			var menuLi = $('<li>').append(menuCheckbox).append(' ').append(menuLabel);

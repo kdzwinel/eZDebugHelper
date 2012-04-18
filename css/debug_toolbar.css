@@ -15,13 +15,13 @@
 	padding: 5px;
 	line-height: 1.2;
 
-	position: fixed;
+	/*position: fixed;
 	top: 0;
 	right: 0;
 	z-index: 1000;
 	width: 600px;
 
-	box-shadow: black -2px 2px 31px;
+	box-shadow: black -2px 2px 31px;*/
 }
 
 	#debug_toolbar_tabs {
@@ -46,18 +46,13 @@
 				font-size: 16px;
 			}
 
-	#debug_toolbar .debug_tab {
-		max-height: 800px;
-		overflow: auto;
-	}
-
-		#debug_toolbar .debug_tab .debug_templates {
+		#debug_toolbar .debug_templates {
 			list-style: none;
 			padding: 0;
 			margin: 0;
 		}
 
-		#debug_toolbar .debug_tab .debug_templates li {
+		#debug_toolbar .debug_templates li {
 			font-size: 14px;
 			margin-top: 2px;
 			margin-bottom: 2px;
@@ -69,10 +64,10 @@
 			cursor: pointer;
 		}
 
-			#debug_toolbar .debug_tab .debug_templates li.template_not_visible {
+			#debug_toolbar .debug_templates li.template_not_visible {
 			}
 
-			#debug_toolbar .debug_tab .debug_templates li.template_in_head {
+			#debug_toolbar .debug_templates li.template_in_head {
 				background-color: #EDC951;
 				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAGCAYAAAA2aTUtAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEAkvCWigPO0AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAtUlEQVQoz63Rz0pCYRQE8B/uBXc+QYaChAutx+ld+rPxIaIkDI1aRPteJ1yGaSrZZpTL5boJZ/OdOTBzzpyPamz9D5W6WqEeYOo4mKBfbHQwwi0a6W3wisvwGywxDH/BCm/hT6l3SRrRPKANM/RKm/ziFIvweQzm4SOsC6YLtCrOdYZP6GJcSrItvV9oFsSrGKxRT8qTUpJrPMZ/jws8HxhyhR/ch3/gLif6zpLvqWv52/Od8R/31zCgSFmoSwAAAABJRU5ErkJggg==);
 				background-position-x: 99%;
@@ -80,7 +75,7 @@
 				background-repeat: no-repeat;
 			}
 
-			#debug_toolbar .debug_tab .debug_templates li.template_in_body {
+			#debug_toolbar .debug_templates li.template_in_body {
 				background-color: #EB6841;
 				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAHCAYAAAD9NeaIAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEAkzAPcL2RQAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAz0lEQVQoz7XRq0qDARyG8Z+6JAqDgWlFGIoWMXjIw2sQTMKuYIjJKGjwJhRFJpvJwzV4CzaTYVhEZGKZlncwPiYTxLc9//OBn/XldxobN1ngdXT8XW2sFY3LuMAxyrH1cY+98Dbe0Ahf4TabzOEy9lMs4AjnWBo0ecHqiDMs4iH8mOT38Ed4cK5rzAw1gxV0S4E6DvCEE7wmuY9KYqoo4TM8UfjHDQ6zfRn7mMdW8WybmWgqE9+hGd8uutgJt1Kwl9/O4hnT+euGf1ANZ6Mc338+K1OhMO3/AAAAAElFTkSuQmCC);
 				background-position-x: 99%;
@@ -88,55 +83,55 @@
 				background-repeat: no-repeat;
 			}
 
-			#debug_toolbar .debug_tab .debug_templates li span {
+			#debug_toolbar .debug_templates li span {
 				font-weight: bold;
 			}
 
-			#debug_toolbar .debug_tab .debug_templates li div.details {
+			#debug_toolbar .debug_templates li div.details {
 				margin-left: 5px;
 				display: none;
 				word-wrap: break-word;
 			}
 
-				#debug_toolbar .debug_tab .debug_templates li div.details p{
+				#debug_toolbar .debug_templates li div.details p{
 					margin: 0;
 					padding: 0;
 				}
 
-				#debug_toolbar .debug_tab .debug_templates li div.details span{
+				#debug_toolbar .debug_templates li div.details span{
 					font-weight: bold;
 				}
 
-		#debug_toolbar .debug_tab .debug_messages_menu {
+		#debug_toolbar .debug_messages_menu {
 			list-style: none;
 			padding: 0;
 			margin: 0;
 			margin-bottom: 5px;
 		}
 
-			#debug_toolbar .debug_tab .debug_messages_menu li {
+			#debug_toolbar .debug_messages_menu li {
 				float: left;
 				margin-right: 5px;
 			}
 
 
-				#debug_toolbar .debug_tab .debug_messages_menu input {
+				#debug_toolbar .debug_messages_menu input {
 					margin: 0;
 					padding: 0;
 				}
 
-				#debug_toolbar .debug_tab .debug_messages_menu label {
+				#debug_toolbar .debug_messages_menu label {
 					display: inline;
 					font-weight: normal;
 					padding: 0;
 				}
 
-		#debug_toolbar .debug_tab .debug_messages {
+		#debug_toolbar .debug_messages {
 			margin: 0;
 			padding: 0;
 		}
 
-			#debug_toolbar .debug_tab .debug_messages li {
+			#debug_toolbar .debug_messages li {
 				font-size: 14px;
 				margin-top: 2px;
 				margin-bottom: 2px;
@@ -150,32 +145,32 @@
 				word-wrap: break-word;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.full {
+			#debug_toolbar .debug_messages li.full {
 				max-height: none;
 				white-space: pre-wrap;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li .debug_message_label {
+			#debug_toolbar .debug_messages li .debug_message_label {
 				font-weight: bold;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.error {
+			#debug_toolbar .debug_messages li.error {
 				background-color: #E34234;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.warning {
+			#debug_toolbar .debug_messages li.warning {
 				background-color: #E3A857;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.notice {
+			#debug_toolbar .debug_messages li.notice {
 				background-color: #FADA5E;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.timing {
+			#debug_toolbar .debug_messages li.timing {
 				background-color: #99BADD;
 			}
 
-			#debug_toolbar .debug_tab .debug_messages li.debug {
+			#debug_toolbar .debug_messages li.debug {
 				background-color: #00A86B;
 			}
 

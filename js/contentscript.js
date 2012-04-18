@@ -1,4 +1,57 @@
-var toolbar = new DebugToolbar();
+function DataProvider() {
+	var that = this;
+	var debug = $('#debug');
+	
+	this.eZDebugEnabled = function() {
+		return (debug.length == 1);
+	}
+	
+	this.getMessages = function() {
+		var messagesTable = debug.find('table:eq(0)');
+		messagesTable.hide();
+		
+		var tableRows = messagesTable.find('tr');
+		if(messagesTable.find('tr:eq(0) div.debug-toolbar').size() > 0) {//ignore debug toolbar if it is present in first row of a table
+			tableRows = messagesTable.find('tr:gt(0)');
+		}
+		
+		var messagesList = new MessagesList();
+		messagesList.process(tableRows);
+		
+		return messagesList.getMessages();
+	}
+	
+	this.getTemplates = function() {
+		var templatesTable = debug.find('#templateusage');
+		templatesTable.hide();
+		tableRows = templatesTable.find('tr.data');
+		
+		return tableRows;
+	}
+	
+	this.getTemplatePositions = function() {
+		var templateCommentReader = new TemplateCommentReader();
+		
+		return templateCommentReader.processComments($('*'));
+	}
+};
+
+var dataProvider;
+
+$(document).ready(function(){
+	dataProvider = new DataProvider();
+});
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+	console.log('CONTENT SCRIPT');
+	console.log(request.command);
+	
+	var response = window["dataProvider"][request.command]();
+	console.log(response);
+	sendResponse(response);
+});
+
+/*var toolbar = new DebugToolbar();
 var settings = new Settings('ez_debug_toolbar');
 
 $('document').ready(function(){
@@ -64,4 +117,4 @@ $('document').ready(function(){
 	if(settings.get('toolbar_width') != undefined) {
 		toolbarDiv.css('width', settings.get('toolbar_width'));
 	}
-});
+});*/
