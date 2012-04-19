@@ -12,14 +12,11 @@ chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, comm
 				chrome.devtools.network.onNavigated.addListener(function(url) {
 					console.log('eZTemplates onNavigated');
 					
-					var interval = setInterval(function(){
-						chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "isLoaded"}, function(response) {
-							if(response){
-								clearInterval(interval);
-								window.init();
-							}
-						});
-					}, 250);
+					chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "isLoaded"}, function(response) {
+						if(response){
+							window.init();
+						}
+					});
 				});
 			});
 		});
@@ -35,14 +32,11 @@ chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, comm
 				chrome.devtools.network.onNavigated.addListener(function(url) {
 					console.log('eZTemplates onNavigated');
 					
-					var interval = setInterval(function(){
-						chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "isLoaded"}, function(response) {
-							if(response){
-								clearInterval(interval);
-								window.init();
-							}
-						});
-					}, 250);
+					chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "isLoaded"}, function(response) {
+						if(response){
+							window.init();
+						}
+					});
 				});
 			});
 		});
