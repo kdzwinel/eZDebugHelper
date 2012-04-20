@@ -6,6 +6,7 @@
   "permissions": [
     "tabs", "http://*/*"
   ],
+  "update_url": "http://ezdebughelper.makingsoftware.pl/updates/eZDebugHelper.xml",
   "icons": {
      "16": "img/icon_16.png",
      "48": "img/icon_48.png"
