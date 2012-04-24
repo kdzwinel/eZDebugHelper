@@ -17,4 +17,15 @@ function init() {
 	});
 }
 
+function hideAllOverlay() {
+	chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "hideAllTemplatePositions"});
+}
+
+function showAllOverlay() {
+	$.each($('#debug_toolbar .debug_templates li div.details:visible'), function(i, details) {
+		var detailsDiv = $(details);
+		chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "setVisibilityOfTemplatePositions", template: detailsDiv.data('templateUsed'), show: true});
+	});
+}
+
 init();

@@ -129,4 +129,19 @@ function TemplatesList() {
 			$('html,body').animate({scrollTop: topPopup.offset().top}, 'slow');
 		}
 	}
+	
+	this.hideAllTemplatePositions = function() {
+		/*for(index in that.templatePositions) {
+			var templatePositionData = that.templatePositions[index];
+			
+			$.each(templatePositionData, function(i, positionObj) {
+				if(positionObj.popupObj === undefined) {
+					return;
+				}
+				
+				positionObj.popupObj.fadeOut('fast');
+			});
+		}*/
+		$('div.ezdebug_template_infobox').fadeOut('fast');
+	}
 }

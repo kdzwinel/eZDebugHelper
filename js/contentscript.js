@@ -41,7 +41,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	
 	var response;
 	
-	if(request.command == "eZDebugEnabled") {
+	if(request.command == "contentScriptLoaded") {
+		response = (debug !== undefined && messagesList !== undefined && templatesList !== undefined);
+	} else if(request.command == "eZDebugEnabled") {
 		response = (debug.length == 1);
 	} else if(request.command == "getMessages") {
 		response = messagesList.getMessages();
@@ -49,6 +51,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		response = templatesList.getTemplates();
 	} else if(request.command == "setVisibilityOfTemplatePositions") {
 		templatesList.setVisibilityOfTemplatePositions(request.template, request.show);
+	} else if(request.command == "hideAllTemplatePositions") {
+		templatesList.hideAllTemplatePositions();
 	}
 	
 	//console.log(response);
