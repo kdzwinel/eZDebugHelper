@@ -77,9 +77,9 @@ function PopupPositioner() {
 			*/
 			if(next[0] == prev[0]) {
 				var element = next.first();
-				//console.log("SINGLE - " + templateFile);
+				//console.log("SINGLE");
+				//console.log(element);
 				
-				//console.log(templateElement);
 				popup.width(element.width());
 				popup.height(element.height());
 				
@@ -88,7 +88,11 @@ function PopupPositioner() {
 				
 				//console.log(element);
 				//element.is('article, aside, blockquote, body, br, button, canvas, catption, col, colgroup, dd, div, dl, dt, embed, fieldset, figcaption, figure, footer, form, li, td')
-				if(element.css('display') == 'block') {
+				if( (element.css('display') == 'block' || 
+				  element.css('display') == 'inline-block' || 
+				  element.css('display') == 'list-item' || 
+				  element.css('display') == 'table-cell') &&
+				  !element.is('img') ) {
 					//console.log('SINGLE INSIDE');
 					element.prepend(popup);
 				} else {

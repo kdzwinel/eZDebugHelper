@@ -59,20 +59,20 @@ var inspectedTab = {
 		});
 	},
 	sendCommand: function(command, callback) {
-		console.log({tabId: chrome.devtools.inspectedWindow.tabId, command: command});
 		chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: command}, callback);
 	}
 };
 
 function addPanels() {
 	console.log('Panels added');
-	
+
 	chrome.devtools.panels.create("eZMessages", "img/icon_24.png", "eZMessages.html", function(panel) {
 		eZPanels.addPanel("eZMessages", panel);  
 	
-		panel.onSearch.addListener(function(action, queryString) {
-
-		});
+		/*panel.onSearch.addListener(function(){
+			console.log('test');
+			alert('test');
+		});*/
 		
 		panel.onShown.addListener(function(window) {
 			console.log('eZMessages onShown');
@@ -81,12 +81,20 @@ function addPanels() {
 		});
 	});
 
+
 	chrome.devtools.panels.create("eZTemplates", "img/icon_24.png", "eZTemplates.html", function(panel) {
 		eZPanels.addPanel("eZTemplates", panel);  
 		
-		panel.onSearch.addListener(function(action, queryString) {
-
-		});
+		/*panel.onSearch.addListener(function(action, queryString) {
+			console.log('eZTemplates onSearch ' + queryString);
+			console.log(action);
+			
+			var eZPanel = eZPanels.getPanel("eZTemplates");
+			
+			if(eZPanel !== undefined && eZPanel.windowObj !== undefined) {
+				eZPanel.windowObj.search(queryString);
+			}
+		});*/
 		
 		panel.onShown.addListener(function(window) {
 			console.log('eZTemplates onShown');

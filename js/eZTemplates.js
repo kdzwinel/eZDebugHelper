@@ -17,6 +17,10 @@ function init() {
 	});
 }
 
+function search(queryString) {
+	templatesList.search(queryString);
+}
+
 function hideAllOverlay() {
 	chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "hideAllTemplatePositions"});
 }

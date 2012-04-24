@@ -131,17 +131,18 @@ function TemplatesList() {
 	}
 	
 	this.hideAllTemplatePositions = function() {
-		/*for(index in that.templatePositions) {
-			var templatePositionData = that.templatePositions[index];
-			
-			$.each(templatePositionData, function(i, positionObj) {
-				if(positionObj.popupObj === undefined) {
-					return;
-				}
-				
-				positionObj.popupObj.fadeOut('fast');
-			});
-		}*/
 		$('div.ezdebug_template_infobox').fadeOut('fast');
+	}
+	
+	this.search = function(queryString) {
+		var regex = new RegExp(queryString, "i");
+		
+		for(index in templates) {
+			var template = templates[index];
+			
+			if(template.requested.search(regex) || template.template.search(regex) || template.used.search(regex)) {
+				template.listBox.css('border', 'solid red 1px');
+			}
+		}
 	}
 }
