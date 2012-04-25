@@ -76,7 +76,7 @@ var inspectedTab = {
 function addPanels() {
 	console.log('Panels added');
 
-	chrome.devtools.panels.create("eZMessages", "img/icon_24.png", "eZMessages.html", function(panel) {
+	chrome.devtools.panels.create("eZMessages", "img/icon_eZMessages_24.png", "eZMessages.html", function(panel) {
 		eZPanels.addPanel("eZMessages", panel);  
 	
 		/*panel.onSearch.addListener(function(){
@@ -92,7 +92,7 @@ function addPanels() {
 	});
 
 
-	chrome.devtools.panels.create("eZTemplates", "img/icon_24.png", "eZTemplates.html", function(panel) {
+	chrome.devtools.panels.create("eZTemplates", "img/icon_eZTemplates_24.png", "eZTemplates.html", function(panel) {
 		eZPanels.addPanel("eZTemplates", panel);  
 		
 		/*panel.onSearch.addListener(function(action, queryString) {
