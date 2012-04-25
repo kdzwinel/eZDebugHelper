@@ -42,7 +42,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	var response;
 	
 	if(request.command == "contentScriptLoaded") {
-		response = (debug !== undefined && messagesList !== undefined && templatesList !== undefined);
+		response = (debug !== undefined);
 	} else if(request.command == "eZDebugEnabled") {
 		response = (debug.length == 1);
 	} else if(request.command == "getMessages") {

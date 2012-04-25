@@ -46,6 +46,16 @@ var eZPanels = new function() {
 			}
 		}
 	}
+	
+	this.failbackAll = function() {
+		for(index in panels) {
+			var panel = panels[index];
+			
+			if(panel.windowObj !== undefined) {
+				panel.windowObj.failback();
+			}
+		}
+	}
 };
 
 var inspectedTab = {
@@ -121,9 +131,14 @@ chrome.devtools.network.onNavigated.addListener(function(url) {
 	if(eZPanels.length == 0) {
 		tryToAddPanels();
 	} else {
-		//reload all panels when page reloads
 		inspectedTab.onLoad(function() {
-			eZPanels.restartAll();
+			inspectedTab.eZDebugOn(function() {
+				//reload all panels when page reloads
+				eZPanels.restartAll();
+			}, function() {
+				//display message that ezdebug is unavailable
+				eZPanels.failbackAll();
+			});
 		});
 	}
 });
@@ -139,7 +154,7 @@ function tryToAddPanels() {
 		inspectedTab.eZDebugOn(function() {
 			addPanels();
 		}, function() {
-			waitForAnotherPageToLoad();
+			//wait for another page to load
 		});
 	});
 }

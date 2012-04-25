@@ -8,11 +8,23 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		}
 		
 		//checks is tab is fully loaded
+		var attempt = 0;
+		var maxAttempts = 4 * 60;//~60sec
+		
 		var interval = setInterval(function(){
+			if(attempt > maxAttempts) {
+				console.log('Error: maxAttempts for isLoaded reached.');
+				clearInterval(interval);
+				return;
+			}
+			attempt++;
+			
 			chrome.tabs.get(request.tabId, function(tab){
+				//console.log('Tab status: ' + tab.status);
 				//tab is loaded
 				if(tab.status == 'complete') {
 					chrome.tabs.sendRequest(tab.id, {command: "contentScriptLoaded"}, function(loaded) {
+						//console.log('contentScriptLoaded ' + loaded );
 						//content script is responding, document.ready was executed
 						if(loaded) {
 							clearInterval(interval);

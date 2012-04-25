@@ -1,7 +1,7 @@
 {
   "name": "eZDebug Helper",
   "description": "Web Developer Toolbar panels for eZPublish (4.5+) websites developers.",
-  "version": "0.32",
+  "version": "0.33",
   "minimum_chrome_version": "10.0",
   "permissions": [
     "tabs", "http://*/*"
@@ -15,7 +15,7 @@
   "devtools_page": "devtools.html",
   "content_scripts": [
     {
-      "matches": ["http://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "css" : ["css/debug_toolbar.css", "css/ui-lightness/jquery-ui-1.8.18.custom.css"],
       "js" : ["js/lib/jquery-1.7.1.min.js",
               "js/lib/jquery-ui-1.8.18.custom.min.js",

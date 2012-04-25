@@ -17,6 +17,14 @@ function init() {
 	});
 }
 
+function failback() {
+	$('#debug_toolbar').slideUp('fast', function(){
+		$(this).empty();
+		$(this).html('<p class="note">eZDebug is not available on this page.</p>');
+		$(this).slideDown('fast');
+	});
+}
+
 function search(queryString) {
 	templatesList.search(queryString);
 }
