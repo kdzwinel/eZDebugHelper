@@ -179,6 +179,19 @@
 				background-color: #00A86B;
 			}
 
+			#debug_toolbar .debug_messages li.is_new {
+				padding-left: 25px;
+			}
+
+				#debug_toolbar .debug_messages li.is_new::before {
+					content: 'new';
+					position: absolute;
+					margin-left: -20px;
+					font-size: 9px;
+					margin-top: 3px;
+					font-family: arial;
+				}
+
 .ezdebug_template_infobox {
 	position: absolute;
 	border: solid red 2px;

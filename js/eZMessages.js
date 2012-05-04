@@ -1,3 +1,4 @@
+var previousMessagesList;
 var messagesList;
 var settings = new Settings();
 
@@ -8,10 +9,22 @@ function init() {
 	chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "getMessages"}, function(messages) {
 		console.log('eZMessages getMessages');
 		
+		if( messagesList ) {
+			previousMessagesList = messagesList;
+		}
+		
 		messagesList = new MessagesList();
 		messagesList.setMessages(messages);
+		
+		//show difference between old message log and new one - highlight new messages
+		if( previousMessagesList ) {
+			messagesList.highlightNewMessages( previousMessagesList );
+		}
+		
 		//display data
 		$('#debug_toolbar').html(messagesList.render());
+		
+		$('#debug_toolbar .debug_messages li.is_new').effect('highlight', {}, 2500);
 	});
 }
 

@@ -1,37 +1,38 @@
 var messagesList;
 var templatesList;
 var debug;
+var scriptLoaded = false;
 
 $(document).ready(function(){
 	debug = $('#debug');
 	
-	if(debug.length == 0) {
-		return;
+	if(debug.length > 0) {
+		//MESSAGES TAB
+		var errorsTable = debug.find('table:eq(0)');
+		errorsTable.hide();
+		
+		var tableRows = errorsTable.find('tr');
+		if(errorsTable.find('tr:eq(0) div.debug-toolbar').size() > 0) {//ignore debug toolbar if it is present in first row of a table
+			tableRows = errorsTable.find('tr:gt(0)');
+		}
+		
+		messagesList = new MessagesList();
+		messagesList.process(tableRows);
+		
+		//TEMPLATES TAB
+		var templatesTable = debug.find('#templateusage');
+		templatesTable.hide();
+		tableRows = templatesTable.find('tr.data');
+		
+		templatesList = new TemplatesList();
+		templatesList.process(tableRows);
+		
+		//TEMPLATE POSITIONS
+		var templateCommentReader = new TemplateCommentReader();
+		templatesList.setTemplatePositions( templateCommentReader.processComments($('*')) );
 	}
 	
-	//MESSAGES TAB
-	var errorsTable = debug.find('table:eq(0)');
-	errorsTable.hide();
-	
-	var tableRows = errorsTable.find('tr');
-	if(errorsTable.find('tr:eq(0) div.debug-toolbar').size() > 0) {//ignore debug toolbar if it is present in first row of a table
-		tableRows = errorsTable.find('tr:gt(0)');
-	}
-	
-	messagesList = new MessagesList();
-	messagesList.process(tableRows);
-	
-	//TEMPLATES TAB
-	var templatesTable = debug.find('#templateusage');
-	templatesTable.hide();
-	tableRows = templatesTable.find('tr.data');
-	
-	templatesList = new TemplatesList();
-	templatesList.process(tableRows);
-	
-	//TEMPLATE POSITIONS
-	var templateCommentReader = new TemplateCommentReader();
-	templatesList.setTemplatePositions( templateCommentReader.processComments($('*')) );
+	scriptLoaded = true;
 });
 
 //HANDLE REQUESTS FROM DEV TOOLS PANELS
@@ -42,7 +43,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	var response;
 	
 	if(request.command == "contentScriptLoaded") {
-		response = (debug !== undefined);
+		response = scriptLoaded;
 	} else if(request.command == "eZDebugEnabled") {
 		response = (debug.length == 1);
 	} else if(request.command == "getMessages") {
