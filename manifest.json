@@ -1,17 +1,16 @@
 {
   "name": "eZDebug Helper",
   "description": "Web Developer Toolbar panels for eZPublish (4.5+) websites developers.",
-  "version": "0.36",
+  "version": "0.40",
   "manifest_version": 1,
   "minimum_chrome_version": "18.0",
   "permissions": [
     "tabs", "http://*/*"
   ],
-  "homepage_url": "http://ezdebughelper.makingsoftware.pl",
-  "update_url": "http://ezdebughelper.makingsoftware.pl/updates/eZDebugHelper.xml",
   "icons": {
-     "16": "img/icon_16.png",
-     "48": "img/icon_48.png"
+     "48": "img/logo_48.png",
+     "64": "img/logo_64.png",
+     "128": "img/logo_128.png"
   },
   "background": {
      "scripts": ["js/background.js"]
