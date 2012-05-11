@@ -16,7 +16,7 @@ function init() {
 		messagesList = new MessagesList();
 		messagesList.setMessages(messages);
 		
-		//show difference between old message log and new one - highlight new messages
+		//show difference between old message log and a new one
 		if( previousMessagesList ) {
 			messagesList.highlightNewMessages( previousMessagesList );
 		}
@@ -24,7 +24,8 @@ function init() {
 		//display data
 		$('#debug_toolbar').html(messagesList.render());
 		
-		$('#debug_toolbar .debug_messages li.is_new').effect('highlight', {}, 2500);
+		//highlight new messages (that are not hidden by filtering)
+		$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
 	});
 }
 
