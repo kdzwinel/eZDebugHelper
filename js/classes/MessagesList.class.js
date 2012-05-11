@@ -23,6 +23,14 @@ function MessagesList() {
 		});
 	}
 	
+	this.getMessages = function() {
+		return messages;
+	}
+	
+	this.setMessages = function(newMessages) {
+		messages = newMessages;
+	}
+	
 	this.count = function(type) {
 		var count = 0;
 		
@@ -55,6 +63,31 @@ function MessagesList() {
 				messageList.find('li.' + messageType).hide();
 			}
 		});
+	}
+	
+	this.highlightNewMessages = function(messagesList) {
+		if( !(messagesList instanceof MessagesList) ) {
+			console.error('Invalid object type, MessagesList was expected.');
+			return;
+		}
+		
+		var oldMessages = messagesList.getMessages();
+		
+		for(index in messages) {
+			var message = messages[index];
+			var isNew = true;
+			
+			for(oindex in oldMessages) {
+				var oldMessage = oldMessages[oindex];
+				
+				if(oldMessage.content == message.content && oldMessage.title == message.title && oldMessage.class == message.class) {
+					isNew = false;
+					break;
+				}
+			}
+			
+			message.isNew = isNew;
+		}
 	}
 	
 	this.render = function() {
@@ -92,6 +125,9 @@ function MessagesList() {
 				$(this).toggleClass('full');
 			}).addClass(message.class).html('<span class="debug_message_label">' + message.title + '</span> ' + message.content);
 			
+			if( message.isNew ) {
+				messageBody.addClass('is_new');
+			}
 			
 			debugMessages.append(messageBody);
 		}

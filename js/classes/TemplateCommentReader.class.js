@@ -53,7 +53,8 @@ function TemplateCommentReader() {
 				var templateObj = templateStack.pop();
 				
 				if(templateObj.fileName != templateFileName) {
-					console.log('Error: start template name is different than end template name');
+					console.error('Error: start template name (' + templateObj.fileName + ') is different than end template name (' + templateFileName + '). Skipping.');
+					templateStack.push(templateObj);
 					return;
 				}
 				
