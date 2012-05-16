@@ -191,26 +191,3 @@
 					margin-top: 3px;
 					font-family: arial;
 				}
-
-.ezdebug_template_infobox {
-	position: absolute;
-	border: solid red 2px;
-	padding: 0;
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wEEAcBNt9fNfYAAACdSURBVFjD7dfJCYAwFEXR51/YgaQLW7Bz+xE7yMqd4BQDLnKR9wsIh0CG281jmnSavC56m35Iqp0v6wUZdwHScAcgEbcDqThJCjLu9pCQcHldysDWuOIOEnCPQAruFkjCXYA03AFIxO1AKk6Sgoyruqhbv9VBxlXtYOu3Osi4IpDyywkyzk3iJnGTuEncJG4SN4mbxE3iJnGT/L5JNpRe8ZI5sMLZAAAAAElFTkSuQmCC);
-	display: block;
-	box-shadow: 0px 0px 25px 8px rgba(255, 0, 0, 0.75);
-	margin: 0;
-	z-index: 1000;
-	min-width: 10px;
-	min-height: 10px;
-	opacity: 1;
-
-	font-size: 12px;
-	font-weight: normal;
-	color: black;
-	font-family: courier;
-}
-
-	.ezdebug_template_infobox span {
-		display: none;
-	}
