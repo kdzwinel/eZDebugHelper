@@ -1,7 +1,7 @@
 {
   "name": "eZDebug Helper",
   "description": "Web Developer Toolbar panels for eZPublish (4.5+) websites developers.",
-  "version": "0.50",
+  "version": "0.51",
   "manifest_version": 1,
   "minimum_chrome_version": "18.0",
   "permissions": [

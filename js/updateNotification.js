@@ -1,6 +1,6 @@
 var message = {
 	title: "eZDebug Helper updated",
-	body: "Settings page and adress bar icon were added.",
+	body: "Settings page and address bar icon were added.",
 	version: "0.5"
 };
 
