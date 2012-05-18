@@ -25,7 +25,9 @@ function init() {
 		
 		$(document).ready(function() {
 			//display data
-			$('#debug_toolbar').html(templatesList.render());
+			$('#debug_toolbar').html(templatesList.render({
+				showTemplatePath: settings.get("showTemplatePath")
+			}));
 			
 			//send request to content script if template name was clicked
 			$('#debug_toolbar .debug_templates li').click(function(){

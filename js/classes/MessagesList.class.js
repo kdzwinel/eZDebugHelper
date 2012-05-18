@@ -90,7 +90,7 @@ function MessagesList() {
 		}
 	}
 	
-	this.render = function() {
+	this.render = function(config) {
 		listDiv = $('<div>');
 		
 		var debugMessagesMenu = $('<ul>').addClass('debug_messages_menu').addClass('clearfix');
@@ -103,12 +103,15 @@ function MessagesList() {
 			var menuCheckbox = $('<input>').attr('type', 'checkbox').attr('id', 'message_filter_' + messageType).val(messageType);
 			var menuLabel = $('<label>').attr('for', 'message_filter_' + messageType).text(messageType + ' (' + that.count(messageType) + ')');
 			
-			if(settings.get(messageType + 'MessageVisible')) {
+			if(config.hasOwnProperty(messageType + 'MessageVisible') && config[messageType + 'MessageVisible']) {
 				menuCheckbox.attr('checked', 'checked');
 			}
 			
 			menuCheckbox.change(function(){
-				settings.set($(this).val() + 'MessageVisible', $(this).is(':checked'));
+				if(config.hasOwnProperty('onFilterChange') && typeof config.onFilterChange == 'function') {
+					config.onFilterChange($(this));
+				}
+				
 				that.filterMessages();
 			});
 			var menuLi = $('<li>').append(menuCheckbox).append(' ').append(menuLabel);

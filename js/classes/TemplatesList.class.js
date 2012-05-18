@@ -41,7 +41,7 @@ function TemplatesList() {
 		return count;
 	}
 	
-	this.render = function() {
+	this.render = function(config) {
 		listDiv = $('<div>');
 		
 		var debugTemplates = $('<ul>').addClass('debug_templates');
@@ -55,11 +55,16 @@ function TemplatesList() {
 			details.append('<p><span>Template</span>: ' + template.template + '</p>');
 			details.append('<p><span>Template loaded</span>: ' + template.used + '</p>');
 			
+			var templateShownByDefault = template.requested;
+			if(config.hasOwnProperty('showTemplatePath') && config.showTemplatePath == 'loaded') {
+				templateShownByDefault = template.used;
+			}
+			
 			var messageBody = $('<li>').click(function(){
 				var detailsDiv = $(this).find('div.details');
 				
 				detailsDiv.toggle();
-			}).addClass('template_position_' + template.DOMPosition).html('<span>' + template.requested + '</span>').append(details);
+			}).addClass('template_position_' + template.DOMPosition).html('<span>' + templateShownByDefault + '</span>').append(details);
 			
 			template.listBox = messageBody;
 			

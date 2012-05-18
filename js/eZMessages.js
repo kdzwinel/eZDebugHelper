@@ -45,7 +45,17 @@ function init() {
 		
 		$(document).ready(function() {
 			//display data
-			$('#debug_toolbar').html(messagesList.render());
+			$('#debug_toolbar').html(messagesList.render({
+				errorMessageVisible: settings.get('errorMessageVisible'),
+				warningMessageVisible: settings.get('warningMessageVisible'),
+				noticeMessageVisible: settings.get('noticeMessageVisible'),
+				debugMessageVisible: settings.get('debugMessageVisible'),
+				timingMessageVisible: settings.get('timingMessageVisible'),
+				
+				onFilterChange: function(checkbox) {
+					settings.set(checkbox.val() + 'MessageVisible', checkbox.is(':checked'));
+				}
+			}));
 		
 			//highlight new messages (that are not hidden by filtering)
 			$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
