@@ -81,6 +81,18 @@
     width: 130px;
 }
 
+#share-container {
+    margin-left: 10px;
+    text-align: left;
+    position: absolute;
+    bottom: 10px;
+}
+
+#share-container p {
+    margin: 0;
+    padding: 0;
+}
+
 #tab-container .tab.active, body.searching #search-container {
     background-color: #D4D4D4;
     border-color: #BFBFBF;
