@@ -31,5 +31,9 @@
               "js/classes/TemplatesList.class.js",
               "js/contentscript.js"]
     }
-  ]
+  ],
+  "page_action": {
+    "default_icon": "img/logo_48.png",
+    "default_title": "eZDebug Helper active"
+  }
 }

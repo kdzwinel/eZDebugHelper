@@ -11,6 +11,8 @@ chrome.extension.sendRequest({command: 'getSettings'}, function(theSettings) {
 		debug = $('#debug');
 		
 		if(debug.length > 0) {
+			chrome.extension.sendRequest({command: 'showIcon'});
+			
 			//MESSAGES TAB
 			var errorsTable = debug.find('table:eq(0)');
 			

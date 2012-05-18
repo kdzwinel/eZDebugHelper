@@ -4,9 +4,9 @@ var settings = new Store("settings", {
 	'labelColorError': '#E2725B',
 	'labelColorWarning': '#E3A857',
 	'labelColorNotice': '#FADA5E',
-	'labelColorDebug': '#99BADD',
-	'labelColorTiming': '#00A86B',
-			 
+	'labelColorDebug': '#00A86B',
+	'labelColorTiming': '#99BADD',
+	
 	'labelColorTemplateHead': '#EDC951',
 	'labelColorTemplateBody': '#EB6841',
 	'labelColorTemplateDefault': '#00A0B0',

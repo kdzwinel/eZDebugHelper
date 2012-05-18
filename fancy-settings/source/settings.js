@@ -123,4 +123,33 @@ window.addEvent("domready", function () {
 		});
 		labelColor.label.setStyle('backgroundColor', labelColor.get());
 	}
+	
+	//ABOUT
+	settings.create({
+		"tab": i18n.get("About"),
+		"group": i18n.get("Source code"),
+		"name": "sourceCode",
+		"type": "description",
+		"text": "Fork the code, report bugs and request the features via <a href='https://github.com/kdzwinel/eZDebugHelper'>Github</a>."
+	});
+	
+	settings.create({
+		"tab": i18n.get("About"),
+		"group": i18n.get("Used projects"),
+		"name": "usedProjects",
+		"type": "description",
+		"text": "<ul>\
+		<li><a href='http://jquery.com/'>jQuery</a></li>\
+		<li><a href='http://jqueryui.com/'>jQuery UI</a></li>\
+		<li><a href='https://github.com/frankkohlhepp/fancy-settings'>Fancy-settings</a></li>\
+		</ul>"
+	});
+	
+	settings.create({
+		"tab": i18n.get("About"),
+		"group": i18n.get("Author"),
+		"name": "author",
+		"type": "description",
+		"text": "<a href='mailto:kdzwinel@gmail.com'>Konrad Dzwinel</a>"
+	});
 });

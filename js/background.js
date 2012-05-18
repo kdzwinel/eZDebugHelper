@@ -4,6 +4,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	
 	if(request.command == 'getSettings') {
 		sendResponse(settings.toObject());
+	} else if(request.command == 'showIcon') {
+		chrome.pageAction.show(sender.tab.id);
+		console.log(sender);
 	} else if(request.command == 'isLoaded') {
 		if(request.tabId === undefined) {
 			console.log('Error - tabId undefined');
