@@ -5,7 +5,7 @@
   "manifest_version": 1,
   "minimum_chrome_version": "18.0",
   "permissions": [
-    "tabs", "http://*/*"
+    "tabs", "http://*/*", "notifications"
   ],
   "icons": {
      "48": "img/logo_48.png",
@@ -16,6 +16,7 @@
   "background": {
      "scripts": ["fancy-settings/source/lib/store.js",
                  "js/storeInit.js",
+                 "js/updateNotification.js",
                  "js/background.js"]
   },
   "devtools_page": "devtools.html",
