@@ -14,7 +14,9 @@
   },
   "options_page": "fancy-settings/source/index.html",
   "background": {
-     "scripts": ["fancy-settings/source/lib/store.js", "js/background.js"]
+     "scripts": ["fancy-settings/source/lib/store.js",
+                 "js/storeInit.js",
+                 "js/background.js"]
   },
   "devtools_page": "devtools.html",
   "content_scripts": [
