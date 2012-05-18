@@ -115,7 +115,7 @@ window.addEvent("domready", function () {
 		"validation": isValidColor
 	}));
 	
-	for(var i=0; i<labelColors.length; i++) {
+	for(var i=0, l=labelColors.length; i<l; ++i) {
 		var labelColor = labelColors[i];
 		
 		labelColor.addEvent("action", function(value) {

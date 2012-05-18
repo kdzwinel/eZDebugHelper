@@ -19,7 +19,11 @@ https://github.com/kdzwinel/eZDebugHelper/issues
 Changelog
 ---------
 
-TODO
+### 0.5 ###
+- settings page added (based on fancy-settings project):
+--- change colors of the labels in both: eZMessages and eZTemplates panels
+--- decide what to do with default eZDebug output
+--- decide if requested or loaded template URL should be shown by a default
 
 Author
 ------

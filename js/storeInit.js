@@ -6,6 +6,7 @@ var settings = new Store("settings", {
 	'labelColorNotice': '#FADA5E',
 	'labelColorDebug': '#99BADD',
 	'labelColorTiming': '#00A86B',
+			 
 	'labelColorTemplateHead': '#EDC951',
 	'labelColorTemplateBody': '#EB6841',
 	'labelColorTemplateDefault': '#00A0B0',

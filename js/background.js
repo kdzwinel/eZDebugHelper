@@ -1,8 +1,9 @@
 //Proxy - transports messages between content script and dev tools
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	console.log(request);
+	
 	if(request.command == 'getSettings') {
-	  sendResponse(settings.toObject());
+		sendResponse(settings.toObject());
 	} else if(request.command == 'isLoaded') {
 		if(request.tabId === undefined) {
 			console.log('Error - tabId undefined');

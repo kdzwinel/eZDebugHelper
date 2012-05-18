@@ -1,11 +1,32 @@
 var previousMessagesList;
 var messagesList;
 
-console.log(settings.toObject());
-
 function init() {
 	console.log('eZMessages init');
+	
+	//create CSS file with label colors set by user
+	var labelColorsCSS = $('<style>');
+	var labels = {
+		"labelColorError": "error",
+		"labelColorWarning": "warning",
+		"labelColorNotice": "notice",
+		"labelColorDebug": "debug",
+		"labelColorTiming": "timing"
+	};
+	
+	for(settingName in labels) {
+		var messageTypeClass = labels[settingName];
+		var labelColor = settings.get(settingName);
 		
+		console.log(labelColor, messageTypeClass, settingName);
+		labelColorsCSS.append("#debug_toolbar .debug_messages li." + messageTypeClass + " { background-color: " + labelColor + "; }");
+	}
+
+	//append auto-generated styles to body
+	$(document).ready(function(){
+		$('body').append(labelColorsCSS);
+	});
+	
 	//ask content script for data
 	chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "getMessages"}, function(messages) {
 		console.log('eZMessages getMessages');
@@ -22,11 +43,13 @@ function init() {
 			messagesList.highlightNewMessages( previousMessagesList );
 		}
 		
-		//display data
-		$('#debug_toolbar').html(messagesList.render());
+		$(document).ready(function() {
+			//display data
+			$('#debug_toolbar').html(messagesList.render());
 		
-		//highlight new messages (that are not hidden by filtering)
-		$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
+			//highlight new messages (that are not hidden by filtering)
+			$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
+		});
 	});
 }
 
