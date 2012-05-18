@@ -211,7 +211,14 @@
         "addEvents": function () {
             var change = (function (event) {
                 if (this.params.name !== undefined) {
-                    settings.set(this.params.name, this.get());
+                    if(typeof this.params.validation != 'function' || this.params.validation(this.get())) {
+                        //value is valid - save it
+                        settings.set(this.params.name, this.get());
+                        this.element.removeClass('invalid');
+                    } else if(typeof this.params.validation == 'function' || !this.params.validation(this.get())) {
+                        //value is invalid
+                        this.element.addClass('invalid');
+                    }
                 }
                 
                 this.fireEvent("action", this.get());

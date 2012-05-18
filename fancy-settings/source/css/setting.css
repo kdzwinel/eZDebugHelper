@@ -79,3 +79,7 @@
     font-weight: lighter;
     color: #999999;
 }
+
+.setting.element.invalid {
+   background-color: rgba(255,0,0,0.5);
+}
