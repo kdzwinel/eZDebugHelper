@@ -51,6 +51,7 @@ function init() {
 				noticeMessageVisible: settings.get('noticeMessageVisible'),
 				debugMessageVisible: settings.get('debugMessageVisible'),
 				timingMessageVisible: settings.get('timingMessageVisible'),
+				dbqueryMessageVisible: settings.get('dbqueryMessageVisible'),
 				
 				onFilterChange: function(checkbox) {
 					settings.set(checkbox.val() + 'MessageVisible', checkbox.is(':checked'));
@@ -59,6 +60,8 @@ function init() {
 		
 			//highlight new messages (that are not hidden by filtering)
 			$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
+			
+			prettyPrint();
 		});
 	});
 }

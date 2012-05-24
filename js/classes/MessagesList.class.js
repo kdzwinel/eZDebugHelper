@@ -5,6 +5,7 @@ function MessagesList() {
 	
 	this.process = function(tableRows) {
 		messages = [];
+		var messageFactory = new MessageFactory();
 		
 		tableRows.each(function(i,item){
 			if(i%2 != 0) {
@@ -14,12 +15,14 @@ function MessagesList() {
 			var header = $(this);
 			var content = $(this).next();
 			
-			messages.push({
+			var message = messageFactory.createMessage({
 				class: header.attr('class'),
 				title: header.find('.debugheader:eq(0)').text(),
 				time: header.find('.debugheader:eq(1)').text(),
 				content: content.find('td pre').html()
 			});
+			
+			messages.push(message);
 		});
 	}
 	
@@ -96,7 +99,7 @@ function MessagesList() {
 		var debugMessagesMenu = $('<ul>').addClass('debug_messages_menu').addClass('clearfix');
 		listDiv.append(debugMessagesMenu);
 		
-		var messageTypes = ['error', 'warning', 'notice', 'debug', 'timing'];
+		var messageTypes = ['error', 'warning', 'notice', 'debug', 'timing', 'dbquery'];
 		for(index in messageTypes) {
 			var messageType = messageTypes[index];
 			
@@ -125,6 +128,12 @@ function MessagesList() {
 		for(index in messages) {
 			var message = messages[index];
 			var messageBody = $('<li>').click(function(){
+				//HACK just for tests - move it to QueryMessage class
+				if($(this).hasClass('dbsquery')) {
+				  console.log($(this).find('pre').html());
+					$(this).find('pre')[0].innerHtml= prettyPrintOne($(this).find('pre').html(), 'sql') ;
+				}
+				
 				$(this).toggleClass('full');
 			}).addClass(message.class).html('<span class="debug_message_label">' + message.title + '</span> ' + message.content);
 			
