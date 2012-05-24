@@ -91,7 +91,8 @@ function PopupPositioner() {
 				if( (element.css('display') == 'block' || 
 				  element.css('display') == 'inline-block' || 
 				  element.css('display') == 'list-item' || 
-				  element.css('display') == 'table-cell') &&
+				  element.css('display') == 'table-cell' ||
+				  element.css('display') == 'table-row-group') &&
 				  !element.is('img') ) {
 					//console.log('SINGLE INSIDE');
 					element.prepend(popup);
