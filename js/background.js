@@ -4,6 +4,13 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	
 	if(request.command == 'getSettings') {
 		sendResponse(settings.toObject());
+	} else if(request.command == 'setSetting') {
+		if(request.settingName == undefined) {
+			console.log('Undefined name of setting to change.');
+			return;
+		}
+		
+		settings.set(request.settingName, request.settingValue);
 	} else if(request.command == 'showIcon') {
 		chrome.pageAction.show(sender.tab.id);
 		console.log(sender);
