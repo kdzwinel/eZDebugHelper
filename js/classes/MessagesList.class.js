@@ -1,6 +1,7 @@
 function MessagesList() {
 	var messages = []
 	var listDiv;
+	this.exectime = 0;//TODO just to test
 	var that = this;
 	
 	this.process = function(tableRows) {
@@ -22,8 +23,16 @@ function MessagesList() {
 				content: content.find('td pre').html()
 			});
 			
+			//TODO just to test
+			if(message.class == 'dbquery') {
+				//console.log([that.exectime, message.query_time, Number(message.query_time)]);
+				that.exectime += Number(message.query_time);
+			}
+			
 			messages.push(message);
 		});
+		
+		console.log('Total queries exec time: ' + that.exectime + ' ms');
 	}
 	
 	this.getMessages = function() {
