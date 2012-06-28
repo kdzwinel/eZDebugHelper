@@ -31,8 +31,6 @@ function init() {
 		$(document).ready(function(){
 			$('body').append(labelColorsCSS);
 		});
-
-
 	
 		//ask content script for data
 		chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "getMessages"}, function(messages) {

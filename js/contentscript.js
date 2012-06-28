@@ -7,45 +7,43 @@ var settings;
 chrome.extension.sendRequest({command: 'getSettings'}, function(theSettings) {
 	settings = theSettings;
 
-	$(document).ready(function(){
-		debug = $('#debug');
+	debug = $('#debug');
+	
+	if(debug.length > 0) {
+		chrome.extension.sendRequest({command: 'showIcon'});
 		
-		if(debug.length > 0) {
-			chrome.extension.sendRequest({command: 'showIcon'});
-			
-			//MESSAGES TAB
-			var errorsTable = debug.find('table:eq(0)');
-			
-			var tableRows = errorsTable.find('tr');
-			if(errorsTable.find('tr:eq(0) div.debug-toolbar').size() > 0) {//ignore debug toolbar if it is present in first row of a table
-				tableRows = errorsTable.find('tr:gt(0)');
-			}
-			
-			messagesList = new MessagesList();
-			messagesList.process(tableRows);
-			
-			//TEMPLATES TAB
-			var templatesTable = debug.find('#templateusage');
-			tableRows = templatesTable.find('tr.data');
-			
-			templatesList = new TemplatesList();
-			templatesList.process(tableRows);
-			
-			//TEMPLATE POSITIONS
-			var templateCommentReader = new TemplateCommentReader();
-			templatesList.setTemplatePositions( templateCommentReader.processComments($('*')) );
-			
-			//optional - hide eZDebug
-			if(settings.hideeZDebug == 'hide_used') {
-				errorsTable.hide();
-				templatesTable.hide();
-			} else if(settings.hideeZDebug == 'hide_all') {
-				debug.hide();
-			}
+		//MESSAGES TAB
+		var errorsTable = debug.find('table:eq(0)');
+		
+		var tableRows = errorsTable.find('tr');
+		if(errorsTable.find('tr:eq(0) div.debug-toolbar').size() > 0) {//ignore debug toolbar if it is present in first row of a table
+			tableRows = errorsTable.find('tr:gt(0)');
 		}
 		
-		scriptLoaded = true;
-	});
+		messagesList = new MessagesList();
+		messagesList.process(tableRows);
+		
+		//TEMPLATES TAB
+		var templatesTable = debug.find('#templateusage');
+		tableRows = templatesTable.find('tr.data');
+		
+		templatesList = new TemplatesList();
+		templatesList.process(tableRows);
+		
+		//TEMPLATE POSITIONS
+		var templateCommentReader = new TemplateCommentReader();
+		templatesList.setTemplatePositions( templateCommentReader.processComments($('*')) );
+		
+		//optional - hide eZDebug
+		if(settings.hideeZDebug == 'hide_used') {
+			errorsTable.hide();
+			templatesTable.hide();
+		} else if(settings.hideeZDebug == 'hide_all') {
+			debug.hide();
+		}
+	}
+	
+	scriptLoaded = true;
 });
 
 //HANDLE REQUESTS FROM DEV TOOLS PANELS

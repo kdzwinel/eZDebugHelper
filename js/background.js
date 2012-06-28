@@ -1,5 +1,6 @@
 //Proxy - transports messages between content script and dev tools
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+	console.log('Request:');
 	console.log(request);
 	
 	if(request.command == 'getSettings') {
@@ -46,7 +47,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 					});
 				}
 			});
-		}, 250);
+		}, 50);
 	} else {
 		chrome.tabs.get(request.tabId, function(tab) {
 			chrome.tabs.sendRequest(tab.id, request, function(response) {
