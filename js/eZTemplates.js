@@ -35,10 +35,15 @@ function init() {
 				}));
 				
 				//send request to content script if template name was clicked
-				$('#debug_toolbar .debug_templates li').click(function(){
-					var detailsDiv = $(this).find('div.details');
+				$('#debug_toolbar .debug_templates li .title').click(function(){
+					var detailsDiv = $(this).siblings('div.details');
 					
-					chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "setVisibilityOfTemplatePositions", template: detailsDiv.data('templateUsed'), show: detailsDiv.is(':visible')});
+					chrome.extension.sendRequest({
+						tabId: chrome.devtools.inspectedWindow.tabId,
+						command: "setVisibilityOfTemplatePositions",
+						template: detailsDiv.data('templateUsed'),
+						show: detailsDiv.is('.shown')
+					});
 				});
 			});
 		});

@@ -59,12 +59,11 @@ function TemplatesList() {
 			if(config.hasOwnProperty('showTemplatePath') && config.showTemplatePath == 'loaded') {
 				templateShownByDefault = template.used;
 			}
+			var messageTitle = $('<div>').addClass('title').text(templateShownByDefault + ' ').click(function(){
+				$(this).siblings('.details').slideToggle().toggleClass('shown');
+			});
 			
-			var messageBody = $('<li>').click(function(){
-				var detailsDiv = $(this).find('div.details');
-				
-				detailsDiv.toggle();
-			}).addClass('template_position_' + template.DOMPosition).html('<span>' + templateShownByDefault + '</span>').append(details);
+			var messageBody = $('<li>').addClass('template_position_' + template.DOMPosition).append(messageTitle).append(details);
 			
 			template.listBox = messageBody;
 			
