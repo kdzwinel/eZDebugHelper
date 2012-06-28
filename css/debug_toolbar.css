@@ -49,24 +49,34 @@
 			margin-bottom: 2px;
 			margin-left: 0;
 			margin-top: 0;
-			padding: 2px;
-			padding-left: 40px;
 
 			background-color: #00A0B0;
-			cursor: pointer;
 
 			background-position-x: 5px;
 			background-position-y: 5px;
 			background-repeat: no-repeat;
+			overflow: hidden;
 		}
 
-			#debug_toolbar .debug_templates li::before {
+			#debug_toolbar .debug_templates li .title {
+				position: relative;
+				font-weight: bold;
+				display: block;
+				width: 100%;
+				padding: 2px;
+				padding-left: 38px;
+				cursor: pointer;
+				box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+			}
+
+			#debug_toolbar .debug_templates li .title::before {
 				content: '';
 				position: absolute;
-				margin-left: -36px;
+				margin-left: 3px;
 				font-size: 9px;
 				margin-top: 3px;
 				font-family: arial;
+				left: 0;
 			}
 
 			#debug_toolbar .debug_templates li.template_position_unknown {
@@ -76,7 +86,7 @@
 				background-color: #EDC951;
 			}
 
-				#debug_toolbar .debug_templates li.template_position_head::before {
+				#debug_toolbar .debug_templates li.template_position_head .title::before {
 					content: '<head>';
 				}
 
@@ -84,18 +94,15 @@
 				background-color: #EB6841;
 			}
 
-				#debug_toolbar .debug_templates li.template_position_body::before {
+				#debug_toolbar .debug_templates li.template_position_body .title::before {
 					content: '<body>';
 				}
-
-			#debug_toolbar .debug_templates li span {
-				font-weight: bold;
-			}
 
 			#debug_toolbar .debug_templates li div.details {
 				margin-left: 5px;
 				display: none;
 				word-wrap: break-word;
+				padding: 4px;
 			}
 
 				#debug_toolbar .debug_templates li div.details p{
@@ -144,19 +151,38 @@
 				margin-top: 0;
 				padding: 2px;
 
+				cursor: pointer;
 				max-height: 16px;
 				overflow: hidden;
-				cursor: pointer;
 				word-wrap: break-word;
 			}
 
 			#debug_toolbar .debug_messages li.full {
 				max-height: none;
 				white-space: pre-wrap;
+				cursor: default;
+				padding: 0;
+			}
+
+				#debug_toolbar .debug_messages li.full .debug_message_label {
+					display: block;
+					cursor: pointer;
+					box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+					padding: 2px;
+				}
+
+				#debug_toolbar .debug_messages li.full .debug_message_content {
+					padding: 4px;
+					display: block;
+				}
+
+			#debug_toolbar .debug_messages li .debug_message_content {
+				display: inline;
 			}
 
 			#debug_toolbar .debug_messages li .debug_message_label {
 				font-weight: bold;
+				display: inline;
 			}
 
 			#debug_toolbar .debug_messages li.error {
@@ -179,15 +205,25 @@
 				background-color: #00A86B;
 			}
 
-			#debug_toolbar .debug_messages li.is_new {
-				padding-left: 25px;
+			#debug_toolbar .debug_messages li.is_new .debug_message_label {
+				padding-left: 17px;
+				position: relative;
 			}
 
-				#debug_toolbar .debug_messages li.is_new::before {
+				#debug_toolbar .debug_messages li.is_new  .debug_message_label::before {
 					content: 'new';
 					position: absolute;
-					margin-left: -20px;
 					font-size: 9px;
-					margin-top: 3px;
+					margin-top: 2px;
 					font-family: arial;
+					font-weight: normal;
+					left: 0;
+				}
+
+			#debug_toolbar .debug_messages li.full.is_new .debug_message_label {
+				padding-left: 19px;
+			}
+
+				#debug_toolbar .debug_messages li.full.is_new  .debug_message_label::before {
+					left: 2px;
 				}

@@ -96,6 +96,7 @@ function MessagesList() {
 		var debugMessagesMenu = $('<ul>').addClass('debug_messages_menu').addClass('clearfix');
 		listDiv.append(debugMessagesMenu);
 		
+		//building top menu
 		var messageTypes = ['error', 'warning', 'notice', 'debug', 'timing'];
 		for(index in messageTypes) {
 			var messageType = messageTypes[index];
@@ -119,14 +120,34 @@ function MessagesList() {
 			debugMessagesMenu.append(menuLi);
 		}
 		
+		//building list of messages
 		var debugMessages = $('<ul>').addClass('debug_messages');
 		listDiv.append(debugMessages);
+
+		var showHideAnim = function(message) {
+			if(!message.is('.full')) {
+					message.addClass('full');
+					message.stop().find('.debug_message_content').hide().slideDown('fast');
+				} else {
+					message.stop().find('.debug_message_content').slideUp('fast', function() {
+						message.removeClass('full');
+						$(this).css('display', 'inline');
+					});
+				}
+			};
 		
 		for(index in messages) {
 			var message = messages[index];
-			var messageBody = $('<li>').click(function(){
-				$(this).toggleClass('full');
-			}).addClass(message.class).html('<span class="debug_message_label">' + message.title + '</span> ' + message.content);
+			var messageTitle = $('<span>').addClass('debug_message_label').text(message.title + ' ').click(function(event){
+				showHideAnim($(this).parent());
+				event.stopPropagation();
+			});
+			var messageContent = $('<div>').addClass('debug_message_content').html(message.content);
+			var messageBody = $('<li>').addClass(message.class).append(messageTitle).append(messageContent).click(function(){
+				if(!$(this).is('.full')) {
+					showHideAnim($(this));
+				}
+			});
 			
 			if( message.isNew ) {
 				messageBody.addClass('is_new');
