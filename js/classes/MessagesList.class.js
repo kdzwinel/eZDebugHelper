@@ -1,7 +1,6 @@
 function MessagesList() {
 	var messages = []
 	var listDiv;
-	this.exectime = 0;//TODO just to test
 	var that = this;
 	
 	this.process = function(tableRows) {
@@ -23,16 +22,8 @@ function MessagesList() {
 				content: content.find('td pre').html()
 			});
 			
-			//TODO just to test
-			if(message.class == 'dbquery') {
-				//console.log([that.exectime, message.query_time, Number(message.query_time)]);
-				that.exectime += Number(message.query_time);
-			}
-			
 			messages.push(message);
 		});
-		
-		console.log('Total queries exec time: ' + that.exectime + ' ms');
 	}
 	
 	this.getMessages = function() {
@@ -57,10 +48,16 @@ function MessagesList() {
 		return count;
 	}
 	
-	this.filterMessages = function() {
+	/**
+	* Manages messages visibility basing on filter settings
+	*
+	* @param {boolean} onlyHide all 'show' operations will be ignored, used to imporve performance
+	*/ 
+	this.filterMessages = function(onlyHide) {
 		if(listDiv == undefined) {
 			return false;
 		}
+		onlyHide = onlyHide ? onlyHide : false;
 		
 		var messageList = listDiv.find('.debug_messages');
 		var checkboxes = listDiv.find('.debug_messages_menu input[type=checkbox]');
@@ -70,7 +67,9 @@ function MessagesList() {
 			var messageType = checkbox.val();
 			
 			if(checkbox.is(':checked')) {
-				messageList.find('li.' + messageType).show();
+				if(!onlyHide) {
+					messageList.find('li.' + messageType).show();
+				}
 			} else {
 				messageList.find('li.' + messageType).hide();
 			}
@@ -130,30 +129,30 @@ function MessagesList() {
 			
 			debugMessagesMenu.append(menuLi);
 		}
-		
-		var debugMessages = $('<ul>').addClass('debug_messages');
-		listDiv.append(debugMessages);
-		
+
+		//building message list using raw HTML to speed things up
+		var messagesHTML = "<ul class='debug_messages'>";
 		for(index in messages) {
 			var message = messages[index];
-			var messageBody = $('<li>').click(function(){
-				//HACK just for tests - move it to QueryMessage class
-				if($(this).hasClass('dbsquery')) {
-				  console.log($(this).find('pre').html());
-					$(this).find('pre')[0].innerHtml= prettyPrintOne($(this).find('pre').html(), 'sql') ;
+
+			var messageContent = "<span class='debug_message_label'>" + message.title + " </span>" + message.content;
+			var messageWrapper = "<li class='" + message.class + (message.isNew?" is_new":"") + "' data-index='" + index + "'>" + messageContent + "</li>";
+
+			messagesHTML += messageWrapper;
+		}
+		messagesHTML += "</ul>"
+		listDiv.append(messagesHTML);
+
+		listDiv.find('ul.debug_messages > li').click(function(){
+				//TODO move this to sepparate class
+				if($(this).find('pre.prettyprint')) {
+					$(this).find('pre').html( prettyPrintOne($(this).find('pre').html(), 'sql') );
 				}
 				
 				$(this).toggleClass('full');
-			}).addClass(message.class).html('<span class="debug_message_label">' + message.title + '</span> ' + message.content);
-			
-			if( message.isNew ) {
-				messageBody.addClass('is_new');
-			}
-			
-			debugMessages.append(messageBody);
-		}
+			});
 		
-		that.filterMessages();
+		that.filterMessages(true);
 		
 		return listDiv;
 	}

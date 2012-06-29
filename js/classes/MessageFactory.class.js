@@ -1,10 +1,9 @@
 function MessageFactory() {
 	this.createMessage = function(config) {
 		var title = config.hasOwnProperty('title') ? config.title : null;
-		//var class = config.hasOwnProperty('class') ? config.class : null;
 		
-		//TODO PostgreSQL? Oracle?
-		if(title && title.indexOf("eZMySQLiDB") != -1) {
+		//For all types of databases debug message is outputed by a common interface (ezdbinterface.php@353) in the same format
+		if(title && title.indexOf("::query(") != -1) {
 			var parts = title.match(/\(([0-9]+) rows, ([0-9.]+) ms\) query number per page:([0-9]+)$/);
 			
 			//TODO QueryMessage class?

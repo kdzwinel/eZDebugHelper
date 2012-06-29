@@ -60,8 +60,6 @@ function init() {
 		
 			//highlight new messages (that are not hidden by filtering)
 			$('#debug_toolbar .debug_messages li.is_new:visible').effect('highlight', {}, 2500);
-			
-			prettyPrint();
 		});
 	});
 }
