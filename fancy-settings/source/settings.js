@@ -141,6 +141,7 @@ window.addEvent("domready", function () {
 		"text": "<ul>\
 		<li><a href='http://jquery.com/'>jQuery</a></li>\
 		<li><a href='http://jqueryui.com/'>jQuery UI</a></li>\
+		<li><a href='http://alexgorbatchev.com/SyntaxHighlighter/'>SyntaxHighlighter</a></li>\
 		<li><a href='https://github.com/frankkohlhepp/fancy-settings'>Fancy-settings</a></li>\
 		</ul>"
 	});

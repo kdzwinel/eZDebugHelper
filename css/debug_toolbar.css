@@ -202,7 +202,11 @@
 			}
 
 			#debug_toolbar .debug_messages li.debug {
-				background-color: #00A86B;
+				background-color: #EDE574;
+			}
+
+			#debug_toolbar .debug_messages li.dbquery {
+				background-color: #AA98BF;
 			}
 
 			#debug_toolbar .debug_messages li.is_new .debug_message_label {

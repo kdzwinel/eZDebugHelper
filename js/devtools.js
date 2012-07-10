@@ -79,10 +79,9 @@ function addPanels() {
 	chrome.devtools.panels.create("eZMessages", "img/icon_eZMessages_24.png", "eZMessages.html", function(panel) {
 		eZPanels.addPanel("eZMessages", panel);  
 	
-		/*panel.onSearch.addListener(function(){
-			console.log('test');
-			alert('test');
-		});*/
+		panel.onSearch.addListener(function(action, queryString){
+			console.log('search - ', action, queryString);
+		});
 		
 		panel.onShown.addListener(function(window) {
 			console.log('eZMessages onShown');
