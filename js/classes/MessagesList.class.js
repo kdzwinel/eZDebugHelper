@@ -16,7 +16,7 @@ function MessagesList() {
 			var content = $(this).next();
 			
 			var message = messageFactory.createMessage({
-				class: header.attr('class'),
+				type: header.attr('class'),
 				title: header.find('.debugheader:eq(0)').text(),
 				time: header.find('.debugheader:eq(1)').text(),
 				content: content.find('td pre').html()
@@ -31,7 +31,8 @@ function MessagesList() {
 	}
 	
 	this.setMessages = function(newMessages) {
-		messages = newMessages;
+		var messageFactory = new MessageFactory();
+		messages = messageFactory.classify(newMessages);
 	}
 	
 	this.count = function(type) {
@@ -40,7 +41,7 @@ function MessagesList() {
 		for(index in messages) {
 			var message = messages[index];
 			
-			if(type == undefined || type == message.class) {
+			if(type == undefined || type == message.type) {
 				count++;
 			}
 		}
@@ -91,7 +92,7 @@ function MessagesList() {
 			for(oindex in oldMessages) {
 				var oldMessage = oldMessages[oindex];
 				
-				if(oldMessage.content == message.content && oldMessage.title == message.title && oldMessage.class == message.class) {
+				if(oldMessage.type == message.type && oldMessage.equals(message)) {
 					isNew = false;
 					break;
 				}
@@ -149,8 +150,8 @@ function MessagesList() {
 		for(index in messages) {
 			var message = messages[index];
 
-			var messageContent = "<span class='debug_message_label'>" + message.title + " </span><div class='debug_message_content'>" + message.content + "</div>";
-			var messageWrapper = "<li class='" + message.class + (message.isNew?" is_new":"") + "' data-index='" + index + "'>" + messageContent + "</li>";
+			var messageContent = "<span class='debug_message_label'>" + message.title + " </span><div class='debug_message_content'>" + message.render() + "</div>";
+			var messageWrapper = "<li class='" + message.type + (message.isNew?" is_new":"") + "' data-index='" + index + "'>" + messageContent + "</li>";
 
 			messagesHTML += messageWrapper;
 		}
@@ -158,16 +159,11 @@ function MessagesList() {
 		listDiv.append(messagesHTML);
 
 		listDiv.find('ul.debug_messages > li').click(function(){
-				//TODO move this to sepparate class
-				var prettyprintPre = $(this).find('pre.sql');
-				if(prettyprintPre.length) {
-					console.log('formatt sql')
+				var idx = $(this).data('index');
+				var message = messages[idx];
 
-					SyntaxHighlighter.highlight({
-						brush: 'sql',
-						toolbar: false,
-						"auto-links": false
-					}, prettyprintPre[0]);
+				if(message && typeof(message.onShow) == "function") {
+					message.onShow( $(this) );
 				}
 
 				if(!$(this).is('.full')) {

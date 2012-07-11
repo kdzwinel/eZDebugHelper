@@ -26,6 +26,8 @@
       "run_at": "document_end",
       "css": ["css/content_script.css"],
       "js" : ["js/lib/jquery-1.7.1.min.js",
+              "js/classes/Messages/Message.class.js",
+              "js/classes/Messages/QueryMessage.class.js",
               "js/classes/MessageFactory.class.js",
               "js/classes/MessagesList.class.js",
               "js/classes/TemplateCommentReader.class.js",
