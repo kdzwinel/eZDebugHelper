@@ -32,7 +32,9 @@ chrome.extension.sendRequest({command: 'getSettings'}, function(theSettings) {
 		
 		//TEMPLATE POSITIONS
 		var templateCommentReader = new TemplateCommentReader();
-		templatesList.setTemplatePositions( templateCommentReader.processComments($('*')) );
+		var templateDetails = templateCommentReader.processComments($('html'));
+		templatesList.setTemplatePositions( templateDetails.positions );
+		templatesList.setTemplateTree( templateDetails.tree );
 		
 		//optional - hide eZDebug
 		if(settings.hideeZDebug == 'hide_used') {
@@ -60,7 +62,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	} else if(request.command == "getMessages") {
 		response = messagesList.getMessages();
 	} else if(request.command == "getTemplates") {
-		response = templatesList.getTemplates();
+		response = {
+			list: templatesList.getTemplates(),
+			tree: templatesList.getTemplateTree()
+		};
 	} else if(request.command == "setVisibilityOfTemplatePositions") {
 		templatesList.setVisibilityOfTemplatePositions(request.template, request.show);
 	} else if(request.command == "hideAllTemplatePositions") {

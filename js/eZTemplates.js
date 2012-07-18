@@ -26,11 +26,12 @@ function init() {
 		//ask content script for data
 		chrome.extension.sendRequest({tabId: chrome.devtools.inspectedWindow.tabId, command: "getTemplates"}, function(templates) {
 			templatesList = new TemplatesList();
-			templatesList.setTemplates(templates);
-			
+			templatesList.setTemplates( templates.list );
+			templatesList.setTemplateTree( templates.tree );
+
 			$(document).ready(function() {
 				//display data
-				$('#debug_toolbar').html(templatesList.render({
+				$('#debug_toolbar').html(templatesList.renderTree({
 					showTemplatePath: settings.showTemplatePath
 				}));
 				

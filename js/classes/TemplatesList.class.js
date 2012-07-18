@@ -1,8 +1,8 @@
 function TemplatesList() {
 	this.popupPositioner;
 	var templates = []
-	var listDiv;
-	var templatesPositions;
+	var templatePositions;
+	var templateTree;
 	var that = this;
 	
 	this.process = function(tableRows) {
@@ -42,7 +42,7 @@ function TemplatesList() {
 	}
 	
 	this.render = function(config) {
-		listDiv = $('<div>');
+		var listDiv = $('<div>');
 		
 		var debugTemplates = $('<ul>').addClass('debug_templates');
 		listDiv.append(debugTemplates);
@@ -72,6 +72,70 @@ function TemplatesList() {
 		
 		return listDiv;
 	}
+
+	this.renderTree = function(config) {
+		var treeDiv = $('<div>');
+		
+		var debugTemplates = $('<ul>').addClass('debug_templates');
+		treeDiv.append(debugTemplates);
+
+		//don't render root node, only it's children
+		for(idx in that.templateTree.children) {
+			var child = that.templateTree.children[idx];
+
+			renderTreeNode({
+				node: child,
+				wrapper: debugTemplates,
+				showTemplatePath: config.showTemplatePath
+			});
+		}
+		
+		return treeDiv;
+	}
+
+	var renderTreeNode = function(config) {
+		var template = getTemplateByFileName( config.node.fileName );
+
+		var messageChildren = $('<ul>');
+		var details = $('<div>').addClass('details').data('templateUsed', template.used).append(messageChildren);
+
+		var templateShownByDefault = template.requested;
+		if(config.hasOwnProperty('showTemplatePath') && config.showTemplatePath == 'loaded') {
+			templateShownByDefault = template.used;
+		}
+		var messageTitle = $('<div>').addClass('title').text(templateShownByDefault + ' ');
+
+		//only nodes with children should be expandable
+		if(config.node.children.length > 0) {
+			messageTitle.click(function(){
+				$(this).siblings('.details').slideToggle().toggleClass('shown');
+			});
+		}
+
+		var messageBody = $('<li>').addClass('template_position_' + template.DOMPosition).append(messageTitle).append(details);
+
+		for(idx in config.node.children) {
+			var child = config.node.children[idx];
+
+			renderTreeNode({
+				node: child,
+				wrapper: messageChildren,
+				showTemplatePath: config.showTemplatePath
+			});
+		}
+
+		config.wrapper.append(messageBody);
+	}
+
+	var getTemplateByFileName = function(file) {
+		for(idx in templates) {
+			var template = templates[idx];
+
+			if(template.used == file) {
+				return template;
+			}
+		}
+	}
 	
 	this.setTemplatePositions = function(templatePositionsArray) {
 		that.templatePositions = templatePositionsArray;
@@ -95,6 +159,14 @@ function TemplatesList() {
 				template.DOMPosition = "body";;
 			}
 		}
+	}
+
+	this.getTemplateTree = function() {
+		return that.templateTree;
+	}
+
+	this.setTemplateTree = function(treeRootNode) {
+		that.templateTree = treeRootNode;
 	}
 	
 	this.setVisibilityOfTemplatePositions = function(templateFile, popupShow) {

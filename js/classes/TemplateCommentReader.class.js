@@ -7,12 +7,12 @@ function TemplateCommentReader() {
 		return template[0] || '';
 	}
 	
-	this.processComments = function(elements) {
+	this.processComments = function(element) {
 		var templatePositions = {};
 		var templateStack = [];
 		var templateDepth = 0;
-		
-		elements.not('iframe').contents().filter(function() {
+
+		element.find('*').not('iframe').contents().filter(function() {
 			//getting only HTML comments from given set of elements
 			return this.nodeType == 8;
 		}).each(function(i, comment){
@@ -62,7 +62,50 @@ function TemplateCommentReader() {
 				templateDepth--;
 			}
 		});
+
+		var rootTreeNode = {
+			fileName: 'root',
+			parent: undefined,
+			children: []
+		};
+		var currentTreeNode = rootTreeNode;
+		var treeNodes = [rootTreeNode];
+
+		var comments = element.html().match(/\<\!\-\- (START|STOP):([\s\S]+?)\-\-\>/g);
+
+		for(idx in comments) {
+			var comment = comments[idx].match(/\<\!\-\-([\s\S]+?)\-\-\>/)[1];
+			
+			if(comment.substring(0, 8) == ' START: ') {
+				var template = that.getTemplateName(comment);
+
+				var newTreeNode = {
+					fileName: template,
+					parent: currentTreeNode,
+					children: []
+				};
+				currentTreeNode.children.push(newTreeNode);
+				currentTreeNode = newTreeNode;
+				treeNodes.push(newTreeNode);
+			} else if(comment.substring(0, 7) == ' STOP: ') {
+				//TODO check if tree is valid
+
+				//TREE
+				currentTreeNode = currentTreeNode.parent;
+			}
+		}
+
+		//removing parent property to make it possible to create a JSON from rootTreeNode object (no circular references)
+		for(idx in treeNodes) {
+			var node = treeNodes[idx];
+			delete node.parent;
+		}
+
+		console.log(rootTreeNode);
 		
-		return templatePositions;
+		return {
+			positions: templatePositions,
+			tree: rootTreeNode
+		};
 	}
 }
