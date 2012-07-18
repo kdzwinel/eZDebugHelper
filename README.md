@@ -19,6 +19,11 @@ https://github.com/kdzwinel/eZDebugHelper/issues
 Changelog
 ---------
 
+### 0.6 ###
+- different way of rendering and displaying messages (looks better and allows to easily copy text from messages body)
+- messages with SQL queries are now being distinguished from other messages allowing user to filter them out
+- SQL syntax highlighting
+
 ### 0.5 ###
 - settings page added (based on fancy-settings project):
 --- change colors of the labels in both: eZMessages and eZTemplates panels
