@@ -136,7 +136,11 @@ function MessagesList() {
 		var showHideAnim = function(message) {
 			if(!message.is('.full')) {
 					message.addClass('full');
-					message.stop().find('.debug_message_content').hide().slideDown('fast');
+
+					/* Don't animate long messages */
+					if(message.text().length < 10000) {
+						message.stop().find('.debug_message_content').hide().slideDown('fast');
+					}
 			} else {
 				message.stop().find('.debug_message_content').slideUp('fast', function() {
 					message.removeClass('full');
