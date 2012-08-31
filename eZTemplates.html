@@ -3,9 +3,22 @@
 	<link href='css/debug_toolbar.css' media="screen" rel="stylesheet" type="text/css" /> 
 	<script src='js/lib/jquery-1.7.1.min.js'></script>
 	<script src='js/classes/TemplatesList.class.js'></script>
+	<script src='js/classes/TemplatesListRenderer.class.js'></script>
+	<script src='js/classes/TemplatesTreeRenderer.class.js'></script>
 	<script src='js/eZTemplates.js'></script>
 </head>
 <body>
-	<div id='debug_toolbar'></div>
+	<div id='debug_toolbar'>
+		<ul class="options_menu clearfix">
+			<li>
+				<select id='templates_tree_view'>
+					<option value='tree_view'>Tree view</option>
+					<option value='list_view'>Grouped list view</option>
+				</select>
+			</li>
+		</ul>
+		<div class='tree_content'></div>
+		<div class='list_content'></div>
+	</div>
 </body>
 </html>

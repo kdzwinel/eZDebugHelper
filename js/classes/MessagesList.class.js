@@ -61,7 +61,7 @@ function MessagesList() {
 		onlyHide = onlyHide ? onlyHide : false;
 		
 		var messageList = listDiv.find('.debug_messages');
-		var checkboxes = listDiv.find('.debug_messages_menu input[type=checkbox]');
+		var checkboxes = listDiv.find('.options_menu input[type=checkbox]');
 		
 		$(checkboxes).each(function(i,item) {
 			var checkbox = $(item);
@@ -105,7 +105,7 @@ function MessagesList() {
 	this.render = function(config) {
 		listDiv = $('<div>');
 		
-		var debugMessagesMenu = $('<ul>').addClass('debug_messages_menu').addClass('clearfix');
+		var debugMessagesMenu = $('<ul>').addClass('options_menu').addClass('clearfix');
 		listDiv.append(debugMessagesMenu);
 		
 		//building top menu

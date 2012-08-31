@@ -50,8 +50,6 @@
 			margin-left: 0;
 			margin-top: 0;
 
-			background-color: #00A0B0;
-
 			background-position-x: 5px;
 			background-position-y: 5px;
 			background-repeat: no-repeat;
@@ -67,6 +65,8 @@
 				padding-left: 38px;
 				cursor: pointer;
 				box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+
+				background-color: #00A0B0;
 			}
 
 			#debug_toolbar .debug_templates li .title::before {
@@ -82,7 +82,7 @@
 			#debug_toolbar .debug_templates li.template_position_unknown {
 			}
 
-			#debug_toolbar .debug_templates li.template_position_head {
+			#debug_toolbar .debug_templates li.template_position_head .title {
 				background-color: #EDC951;
 			}
 
@@ -90,7 +90,7 @@
 					content: '<head>';
 				}
 
-			#debug_toolbar .debug_templates li.template_position_body {
+			#debug_toolbar .debug_templates li.template_position_body .title {
 				background-color: #EB6841;
 			}
 
@@ -105,34 +105,34 @@
 				padding: 4px;
 			}
 
-				#debug_toolbar .debug_templates li div.details p{
+				#debug_toolbar .debug_templates li div.details p {
 					margin: 0;
 					padding: 0;
 				}
 
-				#debug_toolbar .debug_templates li div.details span{
+				#debug_toolbar .debug_templates li div.details span {
 					font-weight: bold;
 				}
 
-		#debug_toolbar .debug_messages_menu {
+		#debug_toolbar .options_menu {
 			list-style: none;
 			padding: 0;
 			margin: 0;
 			margin-bottom: 5px;
 		}
 
-			#debug_toolbar .debug_messages_menu li {
+			#debug_toolbar .options_menu li {
 				float: left;
 				margin-right: 5px;
 			}
 
 
-				#debug_toolbar .debug_messages_menu input {
+				#debug_toolbar .options_menu input {
 					margin: 0;
 					padding: 0;
 				}
 
-				#debug_toolbar .debug_messages_menu label {
+				#debug_toolbar .options_menu label {
 					display: inline;
 					font-weight: normal;
 					padding: 0;

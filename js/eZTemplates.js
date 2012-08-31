@@ -31,12 +31,19 @@ function init() {
 
 			$(document).ready(function() {
 				//display data
-				$('#debug_toolbar').html(templatesList.renderTree({
-					showTemplatePath: settings.showTemplatePath
-				}));
+				$('#debug_toolbar .list_content').html(
+					( new TemplatesListRenderer() ).render(templatesList, {
+						showTemplatePath: settings.showTemplatePath
+					})
+				).hide();
+				$('#debug_toolbar .tree_content').html(
+					( new TemplatesTreeRenderer() ).render(templatesList, {
+						showTemplatePath: settings.showTemplatePath
+					})
+				);
 				
 				//send request to content script if template name was clicked
-				$('#debug_toolbar .debug_templates li .title').click(function(){
+				$('#debug_toolbar .debug_templates li .title').live('click', function(){
 					var detailsDiv = $(this).siblings('div.details');
 					
 					chrome.extension.sendRequest({
@@ -45,6 +52,10 @@ function init() {
 						template: detailsDiv.data('templateUsed'),
 						show: detailsDiv.is('.shown')
 					});
+				});
+
+				$('#templates_tree_view').change(function() {
+					$('#debug_toolbar .tree_content, #debug_toolbar .list_content').toggle();
 				});
 			});
 		});
